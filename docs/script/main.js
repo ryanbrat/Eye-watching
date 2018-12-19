@@ -15,32 +15,32 @@ document.addEventListener('mousemove', function(e) {
   var mY = e.clientY;
 
 
-  for(var i = 0; i < eye.length; i++) {
+  for (var i = 0; i < eye.length; i++) {
     var el = eye[i].getBoundingClientRect();
     var eyeCenterX = el.left + el.width / 2;
     var eyeCenterY = el.top + el.height / 2;
 
     var dX = eyeCenterX - mX;
-    if(dX < -200) {
+    if (dX < -200) {
       dX = -200;
-    } else if(dX > 200) {
+    } else if (dX > 200) {
       dX = 200;
     }
 
     var dY = eyeCenterY - mY;
-    if(dY < -200) {
+    if (dY < -200) {
       dY = -200;
-    } else if(dY > 200) {
+    } else if (dY > 200) {
       dY = 200;
     }
 
     var pX = (dX) * 100 / 200;
-    var moveIrisX = 40 * pX / 100 * -1;
-    var movePupilX = 25 * pX / 100 * -1;
+    var moveIrisX = 30 * pX / 100 * -1;
+    var movePupilX = 30 * pX / 100 * -1;
 
     var pY = (dY) * 100 / 200;
     var moveIrisY = 30 * pY / 100 * -1;
-    var movePupilY = 25 * pY / 100 * -1;
+    var movePupilY = 30 * pY / 100 * -1;
 
     console.log(dX, dY);
 
@@ -55,31 +55,36 @@ var bee = document.getElementById("follow");
 document.addEventListener("mousemove", getMouse);
 
 
-// bee.style.position = "absolute"; //css
-var beepos = {x:0, y:0};
+var beepos = {
+  x: 0,
+  y: 0
+};
 
 setInterval(followMouse, 50);
 
-var mouse = {x:0, y:0}; //mouse.x, mouse.y
+var mouse = {
+  x: 0,
+  y: 0
+}; //mouse.x, mouse.y
 
 
-function getMouse(e){
- mouse.x = e.pageX;
- mouse.y = e.pageY;
+function getMouse(e) {
+  mouse.x = e.pageX - 200;
+  mouse.y = e.pageY - 300;
 
 }
 
-function followMouse(){
- //1. find distance X , distance Y
- var distX = mouse.x - beepos.x;
- var distY = mouse.y - beepos.y;
- //Easing motion
+function followMouse() {
+  //1. find distance X , distance Y
+  var distX = mouse.x - beepos.x;
+  var distY = mouse.y - beepos.y;
+  //Easing motion
   //Progressive reduction of distance
- beepos.x += distX/10;
- beepos.y += distY/10;
+  beepos.x += distX / 20;
+  beepos.y += distY / 20;
 
- bee.style.left = beepos.x + "px";
- bee.style.top = beepos.y + "px";
+  bee.style.left = beepos.x + "px";
+  bee.style.top = beepos.y + "px";
 
 
 }
